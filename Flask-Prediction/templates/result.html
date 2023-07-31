@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Emotion Prediction Results</h1>
+    <p>{{ prediction_result|safe }}</p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Emotion Prediction</h1>
+    <form id="predict-form">
+        <label for="sentence">Enter a sentence:</label>
+        <input type="text" id="sentence" name="sentence" required>
+        <input type="submit" value="Predict">
+    </form>
+    <div id="prediction-result"></div>
+
+    <script>
+        document.getElementById("predict-form").onsubmit = function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById("prediction-result");
+                resultDiv.innerHTML = `Predicted Emotion: ${data.result}`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
